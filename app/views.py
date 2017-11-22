@@ -9,8 +9,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from app import app, login_manager
 from .forms import LoginForm
 from .models import User, Party
-
-
+from app import db
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -27,6 +26,10 @@ def validateAndAdd(party_name):
 def index():
     if request.method == 'POST':
         validateAndAdd(request.form['party_name'])
+        party_name = request.form['party_name']  ##take the token name
+        party = Party.query.filter_by(name=party_name).first()
+        party.counter += 1
+        db.session.commit()
         return redirect(url_for('login'))
     g.user = current_user #global user parameter used by flask framwork
     parties = Party.query.all() #this is a demo comment
@@ -43,10 +46,17 @@ def login():
 
         ## Validate user
         first_name = request.form['first_name']
-        if first_name == "tomer":
-            user = User.query.filter_by(first_name=first_name).first()
-            login_user(user)  ## built in 'flask login' method that creates a user session
-            return redirect(url_for('index'))
+        last_name = request.form['last_name']
+        user = User.query.filter_by(first_name=first_name).first()
+
+        if first_name == user.first_name and last_name == user.last_name:
+            if user.had_voted == False:
+                user.had_voted = True
+                db.session.commit()
+                login_user(user)  ## built in 'flask login' method that creates a user session
+                return redirect(url_for('index'))
+            else:
+                error = u'המצביע כבר הצביע'
 
         else: ##validation error
             error = u'המצביע אינו מופיע בבסיס הנתונים'

@@ -5,6 +5,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(120), index=True, unique=False)
     last_name = db.Column(db.String(120), index=True, unique=False)
+    had_voted = db.Column(db.Boolean,default=False)
 
     def __init__(self, first_name, last_name):
         self.first_name = first_name
@@ -36,10 +37,12 @@ class Party(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), index=True, unique=False)
     picture = db.Column(db.String(120), index=True, unique=False)
+    counter = db.Column(db.Integer,default=0)
 
     def __init__(self, name, picture):
         self.name = name
         self.picture = picture
+        ##self.counter = counter
 
     def get_id(self):
         try:
