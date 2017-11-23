@@ -29,6 +29,7 @@ def index():
         party_name = request.form['party_name']  ##take the token name
         party = Party.query.filter_by(name=party_name).first()
         party.counter += 1
+
         db.session.commit()
         return redirect(url_for('login'))
     g.user = current_user #global user parameter used by flask framwork

@@ -5,7 +5,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(120), index=True, unique=False)
     last_name = db.Column(db.String(120), index=True, unique=False)
-    had_voted = db.Column(db.Boolean,default=False)
+    had_voted = db.Column(db.Boolean, default=False)
+
 
     def __init__(self, first_name, last_name):
         self.first_name = first_name
