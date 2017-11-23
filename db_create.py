@@ -22,6 +22,7 @@ db.session.add(lavan)
 db.session.add(admon)
 db.session.add(tomer)
 db.session.add(watted)  ## Add the new username to the database
+db.session.add(ameer)
 db.session.commit()
 users = User.query.all()
 print(users)
