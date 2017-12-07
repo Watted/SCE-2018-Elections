@@ -16,8 +16,12 @@ def load_user(user_id):
 
 
 def validateAndAdd(party_name):
-    ## implement me!
-    pass
+    party = Party.query.filter_by(name=party_name).first()
+    party.count += 1
+    for user in User.query.all():
+        if user.id==current_user.id:
+            user.voted = True
+    db.session.commit()
 
 
 @app.route('/', methods=['GET'])
@@ -26,16 +30,13 @@ def validateAndAdd(party_name):
 def index():
     if request.method == 'POST':
         validateAndAdd(request.form['party_name'])
-        party_name = request.form['party_name']  ##take the token name
-        party = Party.query.filter_by(name=party_name).first()
-        party.counter += 1
-
-        db.session.commit()
-        return redirect(url_for('login'))
-    g.user = current_user #global user parameter used by flask framwork
-    parties = Party.query.all() #this is a demo comment
+        return redirect(url_for('logout'))
+    error = u'הינך מחוייב לבחור באחד מהפתקים'
+    g.user = current_user
+    parties = Party.query.all()
     return render_template('index.html',
                            title='Home',
+                           error=error,
                            user=g.user,
                            parties=parties)
 
@@ -46,19 +47,17 @@ def login():
     if request.method == 'POST':
 
         ## Validate user
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
-        user = User.query.filter_by(first_name=first_name).first()
-
-        if first_name == user.first_name and last_name == user.last_name:
-            if user.had_voted == False:
-                user.had_voted = True
-                db.session.commit()
-                login_user(user)  ## built in 'flask login' method that creates a user session
-                return redirect(url_for('index'))
+        id = request.form['id']
+        user = User.query.filter_by(id=id).first()
+        if user is not None:
+            if user.first_name == request.form['first_name'] and user.last_name == request.form['last_name']:
+                if user.voted == False:
+                    login_user(user)  ## built in 'flask login' method that creates a user session
+                    return redirect(url_for('index'))
+                else:
+                    error = u'המצביע כבר הצביע'
             else:
-                error = u'המצביע כבר הצביע'
-
+                error = u'פרטים שגויים, נסה שוב'
         else: ##validation error
             error = u'המצביע אינו מופיע בבסיס הנתונים'
 
@@ -71,7 +70,7 @@ def login():
 @login_required
 def logout():
     logout_user() ## built in 'flask login' method that deletes the user session
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 
 ## secret page that shows the user name
