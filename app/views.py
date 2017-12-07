@@ -24,6 +24,7 @@ def validateAndAdd(party_name):
     db.session.commit()
 
 
+
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET', 'POST'])
 @login_required
