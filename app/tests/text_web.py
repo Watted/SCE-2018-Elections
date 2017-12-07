@@ -28,6 +28,7 @@ class AppTestCase(LiveServerTestCase):
         db.session.add(watted)
         db.session.commit()
 
+
     def setUp(self):
         # create a new Firefox session
         self.browser = webdriver.PhantomJS()

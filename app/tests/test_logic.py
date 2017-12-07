@@ -16,6 +16,7 @@ class AppTestCase(unittest.TestCase):
         index_page = self.app.get('/index', content_type='application/json')
         self.assertEqual(index_page.status_code, 302)
 
+
     def test_false_login(self):
         # check that you can't login without id
         invalid_login = self.app.post('/login', data=dict(first_name='ameer', last_name='altore'),

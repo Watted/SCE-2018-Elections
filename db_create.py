@@ -16,7 +16,6 @@ avoda = Party(u'העבודה', 'https://www.am-1.org.il/wp-content/uploads/2015/
 likud = Party(u'הליכוד', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Likud_Logo.svg/250px-Likud_Logo.svg.png')
 lavan = Party(u'פתק לבן', 'https://www.weberthai.com/fileadmin/user_upload/01_training-elements/02.4_others/02.5_color_cards/05_color_mosaic/images/1.jpg')
 
-
 db.session.add(avoda)
 db.session.add(likud)
 db.session.add(lavan)
