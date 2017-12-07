@@ -41,7 +41,6 @@ class Party(db.Model):
     picture = db.Column(db.String(120), index=True, unique=False)
     count = db.Column(db.Integer, default=0)
 
-
     def __init__(self, name, picture):
         self.name = name
         self.picture = picture
