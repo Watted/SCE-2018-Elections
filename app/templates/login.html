@@ -14,13 +14,13 @@
       <br>
       <form action="" method="post">
         <label class="loginlabel" for="first_name">:שם פרטי</label>
-        <input id="first_name" type="text" placeholder="שם פרטי" align="right" name="first_name" value="{{
+        <input id="first_name" type="text" placeholder="שם פרטי" align="right" name="first_name" required="" value="{{
           request.form.first_name }}">
         <label class="loginlabel" for="last_name">:שם משפחה</label>
-         <input id="last_name" type="text" placeholder="שם משפחה" align="right" name="last_name" value="{{
+         <input id="last_name" type="text" placeholder="שם משפחה" align="right" name="last_name" required="" value="{{
           request.form.last_name }}">
         <label class="loginlabel" for="id">:תעודת זהות</label>
-        <input id="id" type="text" placeholder="תעודת זהות" align="right" name="id" value="{{
+        <input id="id" type="text" placeholder="תעודת זהות" align="right" name="id" required="" value="{{
           request.form.id }}">
         <input class="btn btn-default" type="submit" value="כניסה">
       </form>

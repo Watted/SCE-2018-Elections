@@ -39,6 +39,7 @@ class AppTestCase(LiveServerTestCase):
         self.browser.quit()
         with app.app_context():
             db.session.remove()
+            db.session.remove()
             db.drop_all()
 
     def test_server_is_up_and_running(self):
