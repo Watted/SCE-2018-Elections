@@ -1,0 +1,21 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container" align="center">
+    <form action="" method="post">
+        <h1 dir="rtl">{{ user.first_name+' '+user.last_name }}</h1>
+        <h3 dir="rtl">האם ברצונך לאשר את הצבעתך ל{{party.name}}</h3>
+        <div class="col-sm-12 col-xs-12 col-md-4 col-lg-3" style="padding: 5px">
+            <div class="thumbnail">
+                <div align="center"><img src="{{party.picture}}" align="middle" width="200" height="auto"></div>
+            </div>
+            </label>
+        </div>
+        <div class="submit">
+            <input id="back" class="btn btn-default" type="submit" name="btn" value="בטל וחזור למסך הבחירה">
+            <input id="ok" class="btn btn-default" type="submit" name="btn" value="אשר">
+        </div>
+    </form>
+</div>
+{% endblock %}
