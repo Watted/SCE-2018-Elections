@@ -1,13 +1,15 @@
 from cloudshell.api.cloudshell_api import CloudShellAPISession
 import sys
 
-
-server_ip = sys.argv[1]
+server_ip = sys.argv[1] ##This is the internal IP of our CloudShell in AWS
 reservation_id = sys.argv[2]
-DEPLOYED_APP_MODEL = 'Generic App Model'
+DEPLOYED_APP_MODEL = 'Generic Deployed App'
 
-session = CloudShellAPISession(server_ip,sys.argv[3],sys.argv[4],sys.argv[5])
-
+session = CloudShellAPISession(server_ip,
+                               sys.argv[3],
+                               sys.argv[4],
+                               sys.argv[5])  ##make sure
+##to pass these credentials from jenkins and don't store them in GitHub!!
 
 resources = session.GetReservationDetails(reservation_id).ReservationDescription.Resources
 
@@ -25,5 +27,6 @@ public_ip = None
 for att in resource_attributes:
     if att.Name == 'Public IP':
         public_ip = att.Value  ## for getting the public ip
-        print (public_ip)
-    break
+        break
+
+print (my_resource[0].FullAddress)  ## for getting the private ip - internal ip
