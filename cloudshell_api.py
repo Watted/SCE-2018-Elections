@@ -1,6 +1,7 @@
 from cloudshell.api.cloudshell_api import CloudShellAPISession
 import sys
 
+
 server_ip = sys.argv[1]
 reservation_id = sys.argv[2]
 DEPLOYED_APP_MODEL = 'Generic App Model'
