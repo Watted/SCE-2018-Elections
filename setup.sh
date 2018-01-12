@@ -17,10 +17,6 @@ cd SCE-2018-Elections
 #install our app requirements
 sudo pip install -r requirements.txt
 
-sudo yum install git-all -y
-sudo yum install wget -y
-
-
 #create db
 python db_create.py
 
@@ -29,4 +25,3 @@ sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 5000
 
 #run app
 nohup python run.py > ../log.txt 2>&1 </dev/null &
-echo ok
