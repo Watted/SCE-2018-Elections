@@ -11,12 +11,15 @@ sudo yum -y groupinstall "Development Tools"
 sudo easy_install pip
 
 #clone proejct repo
-git clone https://github.com/Watted/SCE-2018-Elections.git
+git clone https://github.com/watted/SCE-2018-Elections.git
 cd SCE-2018-Elections
-
 
 #install our app requirements
 sudo pip install -r requirements.txt
+
+sudo yum install git-all -y
+sudo yum install wget -y
+
 
 #create db
 python db_create.py
