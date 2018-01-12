@@ -14,6 +14,7 @@ sudo easy_install pip
 git clone https://github.com/Watted/SCE-2018-Elections.git
 cd SCE-2018-Elections
 
+
 #install our app requirements
 sudo pip install -r requirements.txt
 
